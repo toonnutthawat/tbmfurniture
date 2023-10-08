@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Kafe Application</title>
+  <title>TBM Furniture</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div th:insert="~{fragments/header :: header}"></div>
 <div class="container w-50 p-3">
   <h1 class="display-5">Sign Up</h1>
   <form action="#" th:action="@{/signup}" method="POST">
@@ -33,6 +34,17 @@
       <input id="inputPassword" type="password" class="form-control"
              name="password">
     </div>
+
+    <div class="mb-3">
+      <label for="inputName">Role</label>
+      <select class="form-select" multiple aria-label="multiple select example" name="role">
+        <option value="Sales Staff">Sales Staff</option>
+        <option value="Production Control Leader">Production Control Leader</option>
+        <option value="QC Inspector">QC Inspector</option>
+        <option value="Deliveryman">Deliveryman</option>
+      </select>
+    </div>
+
     <button id="submit-button" type="submit" class="btn btn-primary">Sign
       Up</button>
   </form>
