@@ -16,5 +16,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public void createProduct(Product product){
+        Product record = new Product();
+        record.setName(product.getName());
+        record.setPrice(product.getPrice());
+        productRepository.save(record);
+    }
 
 }

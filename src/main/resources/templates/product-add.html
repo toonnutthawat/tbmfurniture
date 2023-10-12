@@ -7,6 +7,25 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div th:insert="~{fragments/header :: header}"></div>
 
+<div class="container w-50 p-3">
+    <h1 class="display-5">Add Product</h1>
+
+
+    <form action="#" th:action="@{/products/add}" method="POST">
+        <div class="mb-3">
+            <label for="inputName">Name</label>
+            <input id="inputName" type="input" class="form-control"
+                   name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="inputPrice">Price</label>
+            <input id="inputPrice" type="input" class="form-control"
+                   name="price" required>
+        </div>
+        <button id="submit-button" type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
 </body>
 </html>

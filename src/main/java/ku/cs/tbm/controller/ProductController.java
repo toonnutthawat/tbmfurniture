@@ -1,10 +1,13 @@
 package ku.cs.tbm.controller;
 
+import ku.cs.tbm.entity.Product;
 import ku.cs.tbm.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,7 +19,20 @@ public class ProductController {
 
     @GetMapping
     public String getAllMenus(Model model) {
-        model.addAttribute("menus", productService.getAllProduct());
+        model.addAttribute("product", productService.getAllProduct());
         return "product-all";
+    }
+
+    @GetMapping("/add")
+    public String getProductAdd(Model model){;
+        model.addAttribute("product", productService.getAllProduct());
+        return "product-add";
+    }
+
+    @PostMapping("/add")
+    public String createProduct(@ModelAttribute Product product, Model model){
+        productService.createProduct(product);
+        model.addAttribute("product", productService.getAllProduct());
+        return "redirect:/products";
     }
 }
