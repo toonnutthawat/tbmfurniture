@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>TBM Furniture</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main{
+    width: 360px;
+    margin: 2rem auto;
+    height: 420px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.img{
+    height: 250px;
+    background: brown; 
+    overflow: hidden; 
+}
+
+.img img{
+    width: 100%;
+}
+
+.content{
+    text-align: center;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.content p{
+    color: #464444;
+}
+.footer{
+    text-align: center;;
+}
+
+    </style>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="main">
+    <div class="img">
+        <img src="https://www.ikea.com/th/en/images/products/paerup-2-seat-sofa-gunnared-dark-grey__1041901_pe841181_s5.jpg" alt="">
+    </div>
+    <div class="content">
+        <h3>ใหม่</h3>
+        <h2>FRIHETEN ฟรีเฮตเตน</h2>
+        <p>โซฟาเบดเข้ามุม มีที่เก็บของ, ควิฟเตโบ เทาเข้ม</p>
+    </div>
+    <div class="footer">
+        <p>7,990บาท</p>
+    </div>
+</div>
+
+<div class="main">
+    <div class="img">
+        <img src="https://www.ikea.com/th/th/images/products/kleppstad-wardrobe-with-3-doors-white__0753594_pe748782_s5.jpg?f=s" alt="">
+    </div>
+    <div class="content">
+        <h3>ใหม่</h3>
+        <h2>KLEPPSTAD เคลปป์สตัด</h2>
+        <p>ตู้เสื้อผ้า 3 บาน, ขาว, 117x176 ซม.</p>
+    </div>
+    <div class="footer">
+        <p>4,490บาท</p>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>
