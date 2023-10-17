@@ -6,9 +6,14 @@
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <link rel="stylesheet" href="css/main.css">
+  <style>
+    a{
+      color: white;
+    }
+  </style>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #371BB5;"
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9eb8dc;"
      th:fragment="header" >
   <div class="container-fluid">
     <a class="navbar-brand btn-light" th:href="@{/}">TBM Furniture</a>
@@ -30,6 +35,14 @@
 
         <li class="nav-item" sec:authorize="isAuthenticated()">
           <a class="nav-link" th:href="@{/products/add}">Add Product</a>
+        </li>
+
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+          <a class="nav-link" th:href="@{/customers/add}">Add Customer</a>
+        </li>
+
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+          <a class="nav-link" th:href="@{/customers}">Customers</a>
         </li>
       </ul>
     </div>

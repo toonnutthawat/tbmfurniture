@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>TBM Furniture</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container w-50 p-3">
+  <table th:each="customer : ${customers}" class="table table-bordered table-striped table-hover">
+    <tr class="table-success">
+      <td colspan="3"><span th:text="${customer.id}"></span></td>
+    </tr>
+    <tr>
+      <td colspan="3">Name : <span th:text="${customer.name}"></span></td>
+    </tr>
+    <tr>
+      <td colspan="3">Compamy : <span th:text="${customer.companyName}"></span></td>
+    </tr>
+    <tr>
+      <td colspan="3">Number : <span th:text="${customer.number}"></span></td>
+    </tr>
+
+    <tr>
+      <td colspan="3">Credit Status : <span th:text="${customer.credit}"></span></td>
+    </tr>
+
+  </table>
+</div>
+</body>
+</html>
