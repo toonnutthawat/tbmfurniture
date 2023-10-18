@@ -21,4 +21,6 @@ public class Customer {
     private String address;
 
     private CreditStatus credit;
+
+
 }

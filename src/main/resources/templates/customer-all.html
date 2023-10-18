@@ -17,14 +17,16 @@
       <td colspan="3">Name : <span th:text="${customer.name}"></span></td>
     </tr>
     <tr>
-      <td colspan="3">Compamy : <span th:text="${customer.companyName}"></span></td>
+      <td colspan="3">Company : <span th:text="${customer.companyName}"></span></td>
     </tr>
     <tr>
       <td colspan="3">Number : <span th:text="${customer.number}"></span></td>
     </tr>
 
     <tr>
-      <td colspan="3">Credit Status : <span th:text="${customer.credit}"></span></td>
+      <td colspan="3">Credit Status : <span th:text="${customer.credit}"></span> <span>  
+        <a class="btn btn-info"
+        th:href="@{/customers/{id}(id=${customer.id})}">Check Credit</a></span></td>
     </tr>
 
   </table>

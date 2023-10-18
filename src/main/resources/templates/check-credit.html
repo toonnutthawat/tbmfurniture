@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TBM Furniture</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container w-50 p-3">
+    <h1 class="display-6">Check Credit</h1>
+
+    <table th:object="${customer}" class="table table-bordered table-striped table-hover">
+        <tr class="table-success">
+          <td><span th:text="${customer.id}"></span></td>
+        </tr>
+        <tr>
+          <td>Name : <span th:text="${customer.name}"></span></td>
+        </tr>
+        <tr>
+          <td>Company : <span th:text="${customer.companyName}"></span></td>
+        </tr>
+        <tr>
+          <td>Number : <span th:text="${customer.number}"></span></td>
+        </tr>
+
+        <tr>
+            <td>Address : <span th:text="${customer.address}"></span></td>
+          </tr>
+    
+        <tr>
+          <td>Credit Status : <span th:text="${customer.credit}"></span></td>
+        </tr>
+      </table>
+
+      <form action="#"
+      th:action="@{/customers/{id}(id=${customer.id})}"
+      method="POST">
+
+    <button  type="submit" name="giveGoodCredit"
+            class="btn btn-success">Good Credit
+    </button>
+
+          <button  type="submit" name="giveBadCredit"
+                  class="btn btn-danger">Bad Credit
+          </button>
+    </form>
+
+
+
+
+</div>
+</body>
+</html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CustomerService {
@@ -28,5 +29,22 @@ public class CustomerService {
 
         customerRepository.save(record);
     }
+
+    public Customer getCustomerById(UUID id){
+        return customerRepository.findById(id).get();
+    }
+
+    public void giveGoodCredit(UUID id){
+        Customer customer =  customerRepository.findById(id).get();
+        customer.setCredit(CreditStatus.GoodCredit);
+        customerRepository.save(customer);
+    }
+
+    public void giveBadCredit(UUID id){
+        Customer customer =  customerRepository.findById(id).get();
+        customer.setCredit(CreditStatus.BadCredit);
+        customerRepository.save(customer);
+    }
+
 
 }

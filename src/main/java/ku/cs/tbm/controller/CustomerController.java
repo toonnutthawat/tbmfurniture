@@ -5,10 +5,9 @@ import ku.cs.tbm.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/customers")
@@ -27,6 +26,28 @@ public class CustomerController {
         customerService.addCustomer(customer);
         //model.addAttribute("customer",customerService.getAllCustomer());
         return "redirect:/products";
+    }
+
+    @GetMapping("/{id}")
+    public String getCustomerById(@PathVariable UUID id,Model model)
+    {
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer",customer);
+        return "check-credit";
+    }
+
+    @PostMapping(value = "/{id}",params = "giveGoodCredit")
+    public String giveGoodCredit(@PathVariable UUID id,Model model)
+    {
+        customerService.giveGoodCredit(id);
+        return "redirect:/customers";
+    }
+
+    @PostMapping(value = "/{id}",params = "giveBadCredit")
+    public String giveBadCredit(@PathVariable UUID id,Model model)
+    {
+        customerService.giveBadCredit(id);
+        return "redirect:/customers";
     }
 
     @GetMapping

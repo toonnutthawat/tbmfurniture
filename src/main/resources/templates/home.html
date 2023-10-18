@@ -8,17 +8,13 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
         img{
-            height: 50%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div>
+<div class="hero-image">
     <img src="https://www.stickley.com/cdn/shop/files/HomePage_SURREYHILLSImageBanner.jpg?v=1673554686&width=1500" alt="">
 </div>
 <div class="container">
