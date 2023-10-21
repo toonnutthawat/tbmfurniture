@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>TBM Furniture</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+  <h1 class="display-5">Order</h1>
+
+
+  <form action="#" th:action="@{/orders}" method="POST">
+    <div class="mb-3">
+      <label for="inputCustomer">companyName</label>
+      <select class="form-control" id="inputCustomer" name="customer">
+        <option th:each="customer : ${customers}"
+                th:value="${customer.id}" th:text="${customer.companyName}">
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="inputProduct">Product</label>
+      <select class="form-control" id="inputProduct" name="product">
+        <option th:each="product : ${products}"
+                th:value="${product.id}" th:text="${product.name}">
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="inputQuantity">Quantity</label>
+      <input id="inputQuantity" type="input" class="form-control"
+             name="quantity" required>
+    </div>
+
+    <button id="submit-button" type="submit" class="btn btn-primary">Order</button>
+  </form>
+</div>
+</body>
+</html>

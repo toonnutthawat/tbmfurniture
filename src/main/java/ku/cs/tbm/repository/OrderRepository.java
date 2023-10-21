@@ -1,10 +1,10 @@
 package ku.cs.tbm.repository;
 
-import ku.cs.tbm.entity.Product;
+import ku.cs.tbm.entity.OrderKey;
+import ku.cs.tbm.entity.OrderList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
 @Repository
-public interface ProductRepository extends JpaRepository<Product, UUID> {
+public interface OrderRepository extends JpaRepository<OrderList, OrderKey> {
 }

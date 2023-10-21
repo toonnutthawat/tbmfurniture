@@ -3,9 +3,12 @@ package ku.cs.tbm.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import ku.cs.tbm.common.CreditStatus;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,5 +25,6 @@ public class Customer {
 
     private CreditStatus credit;
 
-
+    @OneToMany(mappedBy = "customer")
+    private List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
 }

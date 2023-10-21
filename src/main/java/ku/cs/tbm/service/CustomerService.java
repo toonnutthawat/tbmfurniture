@@ -2,10 +2,12 @@ package ku.cs.tbm.service;
 
 import ku.cs.tbm.common.CreditStatus;
 import ku.cs.tbm.entity.Customer;
+import ku.cs.tbm.entity.Product;
 import ku.cs.tbm.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +19,16 @@ public class CustomerService {
 
     public List<Customer> getAllCustomer(){
         return customerRepository.findAll();
+    }
+
+    public List<Customer> getALlCustomerHasGoodCredit(){
+        List<Customer> list = new ArrayList<>();
+        for(Customer customer: customerRepository.findAll()){
+            if(customer.getCredit().equals(CreditStatus.GoodCredit)){
+                list.add(customer);
+            }
+        }
+        return list;
     }
 
     public void addCustomer(Customer customer){
