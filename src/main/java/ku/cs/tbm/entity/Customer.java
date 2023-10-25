@@ -25,6 +25,10 @@ public class Customer {
 
     private CreditStatus credit;
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
     @OneToMany(mappedBy = "customer")
     private List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
 }

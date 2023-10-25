@@ -8,9 +8,13 @@ import ku.cs.tbm.service.CustomerService;
 import ku.cs.tbm.service.OrderService;
 import ku.cs.tbm.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/orders")
@@ -32,8 +36,9 @@ public class OrderController {
     }
 
     @GetMapping("/orderList")
-    public String viewOderListPage(Model model){
-        model.addAttribute("cart",orderService.getCurrentOrder());
+    public String viewCart(Model model, Authentication authentication){
+        model.addAttribute("cart",orderService.getCurrentOrder(authentication.getName()));
+        //model.addAttribute("cart",orderService.getOneOrderInCart(authentication.getName()));
         return "cart";
     }
 
@@ -48,9 +53,40 @@ public class OrderController {
     private String order(@ModelAttribute Customer customer,
                          @ModelAttribute Product product,
                          @ModelAttribute OrderList orderList,
+                         Authentication authentication,
                          Model model){
-        orderService.order(customer,product,orderList);
+        orderService.order(customer,product,orderList,authentication.getName());
         return "home";
+    }
+
+    @GetMapping("/allOrders")
+    public String getAllOrders(Model model){
+        model.addAttribute("orders",orderService.getConfirmOrders());
+        return "order-all";
+    }
+
+    @GetMapping("/allOrders/{id}")
+    public String manageOrder(@PathVariable UUID id, Model model){
+        model.addAttribute("order",orderService.getOrderById(id));
+        return "manage-order";
+    }
+
+    @PostMapping(value = "/allOrders/{id}/managed",params = "giveManufacturingStatus")
+    public String giveManufacturingStatus(@PathVariable UUID id, Model model){
+        orderService.giveManufacturingStatus(id);
+        return "redirect:/orders/allOrders";
+    }
+
+    @PostMapping(value = "/allOrders/{id}/managed",params = "giveDeliveryStatus")
+    public String giveDeliveryStatus(@PathVariable UUID id, Model model){
+        orderService.giveDeliveryStatus(id);
+        return "redirect:/orders/allOrders";
+    }
+
+    @PostMapping(value = "/allOrders/{id}/managed",params = "giveFinishStatus")
+    public String giveFinishStatus(@PathVariable UUID id, Model model){
+        orderService.giveFinishStatus(id);
+        return "redirect:/orders/allOrders";
     }
 
 

@@ -17,9 +17,12 @@ public class PurchaseOrder {
     @GeneratedValue
     private UUID id;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+
     private LocalDateTime OrderDate;
-
-
 
     private OrderStatus status;
 
@@ -28,18 +31,18 @@ public class PurchaseOrder {
     private Customer customer;
 
     @OneToMany(mappedBy = "purchaseOrder")
-    private List<OrderList> items = new ArrayList<>();
+    private List<OrderList> orderLists = new ArrayList<>();
 
     public double getTotal() {
         double total = 0;
-        for (OrderList order : items)
+        for (OrderList order : orderLists)
             total += order.getSubTotal();
         return total;
     }
 
     public boolean getTotalQuantity(){
         double total = 0;
-        for (OrderList order : items)
+        for (OrderList order : orderLists)
             total += order.getQuantity();
         if(total < 3){
             return true;

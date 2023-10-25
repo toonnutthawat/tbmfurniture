@@ -23,5 +23,9 @@ public class Member {
     private String name;
     private String role;
 
+    @OneToMany(mappedBy = "member")
+    private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+
+
 
 }

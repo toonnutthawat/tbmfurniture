@@ -22,11 +22,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${cart ne null}" th:each="item : ${cart.items}" >
-    <td th:text="${item.product.name}"></td>
-    <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 2,'POINT')}"></td>
-    <td style="text-align: right" th:text="${item.quantity}"></td>
-    <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubTotal(), 0, 'COMMA', 2,'POINT')}"></td>
+    <tr th:if="${cart ne null}" th:each="order : ${cart.orderLists}" >
+    <td th:text="${order.product.name}"></td>
+    <td style="text-align: right" th:text="${#numbers.formatDecimal(order.product.price, 0, 'COMMA', 2,'POINT')}"></td>
+    <td style="text-align: right" th:text="${order.quantity}"></td>
+    <td style="text-align: right" th:text="${#numbers.formatDecimal(order.getSubTotal(), 0, 'COMMA', 2,'POINT')}"></td>
 
 
     </tr>
@@ -38,7 +38,7 @@
         <div id="error-msg" th:if="${cart.getTotalQuantity.equals(true)}" class="alert alert-danger">
             Must order more than 3 products.
         </div>
-    <button id="submit-button" type="submit" class="btn btn-primary" >Submit Order</button>
+    <button id="submit-button" th:disabled="${cart.getTotalQuantity.equals(true)}" type="submit" class="btn btn-primary" >Submit Order</button>
     </form>
     </div>
 </body>
