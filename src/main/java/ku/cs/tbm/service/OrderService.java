@@ -30,6 +30,9 @@ public class OrderService {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private ReceiptRepository receiptRepository;
+
     private UUID id;
 
     public void createNewOrder(String memberUsername){
@@ -61,6 +64,15 @@ public class OrderService {
 
     }
 
+    public void receipt(UUID id){
+        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
+
+        Receipt receipt = new Receipt();
+        receipt.setPurchaseOrder(purchaseOrder);
+        receipt.setDeliveryDate(LocalDateTime.now());
+        receiptRepository.save(receipt);
+    }
+
     public PurchaseOrder getCurrentOrder(String memberUsername) {
         if (id == null)
             createNewOrder(memberUsername);
@@ -73,6 +85,15 @@ public class OrderService {
 
     public PurchaseOrder getOrderById(UUID id){
         return purchaseOrderRepository.findById(id).get();
+    }
+
+    public Receipt getReceiptById(UUID id){
+        for(Receipt receipt : receiptRepository.findAll()){
+            if(receipt.getPurchaseOrder().getId().equals(id)){
+                return receipt;
+            }
+        }
+        return null;
     }
 
     public PurchaseOrder getOneOrderInCart(String memberUsername){
@@ -110,6 +131,16 @@ public class OrderService {
         return orders;
     }
 
+    public List<PurchaseOrder> getDeliveryOrders(){
+        List<PurchaseOrder> orders = new ArrayList<>();
+        for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
+            if(purchaseOrder.getStatus().equals(OrderStatus.DELIVERY) || purchaseOrder.getStatus().equals(OrderStatus.PAYMENTCOMPLETE)){
+                orders.add(purchaseOrder);
+            }
+        }
+        return orders;
+    }
+
     public void submitOrder(){
         PurchaseOrder currentOrder =
                 purchaseOrderRepository.findById(id).get();
@@ -129,6 +160,12 @@ public class OrderService {
     public void giveDeliveryStatus(UUID id){
         PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
         purchaseOrder.setStatus(OrderStatus.DELIVERY);
+        purchaseOrderRepository.save(purchaseOrder);
+    }
+
+    public void givePaymentCompleteStatus(UUID id){
+        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
+        purchaseOrder.setStatus(OrderStatus.PAYMENTCOMPLETE);
         purchaseOrderRepository.save(purchaseOrder);
     }
 

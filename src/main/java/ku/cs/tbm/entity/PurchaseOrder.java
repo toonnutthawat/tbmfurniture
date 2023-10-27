@@ -22,7 +22,8 @@ public class PurchaseOrder {
     private Member member;
 
 
-    private LocalDateTime OrderDate;
+    private LocalDateTime orderDate;
+
 
     private OrderStatus status;
 
@@ -50,5 +51,12 @@ public class PurchaseOrder {
         else {
             return false;
         }
+    }
+
+    public boolean checkDeliveryStatus(){
+        if(status.equals(OrderStatus.DELIVERY)){
+            return true;
+        }
+        return false;
     }
 }
