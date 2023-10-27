@@ -100,6 +100,16 @@ public class OrderService {
         return orders;
     }
 
+    public List<PurchaseOrder> getManufacturingOrders(){
+        List<PurchaseOrder> orders = new ArrayList<>();
+        for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
+            if(purchaseOrder.getStatus().equals(OrderStatus.MANUFACTURING)){
+                orders.add(purchaseOrder);
+            }
+        }
+        return orders;
+    }
+
     public void submitOrder(){
         PurchaseOrder currentOrder =
                 purchaseOrderRepository.findById(id).get();
