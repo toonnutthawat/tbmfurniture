@@ -52,9 +52,35 @@ public class PurchaseOrder {
             return false;
         }
     }
+    public boolean checkConfirmStatus(){
+        if(status.equals(OrderStatus.CONFIRM)){
+            return true;
+        }
+        return false;
+    }
 
+    public boolean checkManufacturingStatus(){
+        if(status.equals(OrderStatus.MANUFACTURING)){
+            return true;
+        }
+        return false;
+    }
     public boolean checkDeliveryStatus(){
         if(status.equals(OrderStatus.DELIVERY)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkPaymentCompleteStatus(){
+        if(status.equals(OrderStatus.PAYMENTCOMPLETE)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkFinishStatus(){
+        if(status.equals(OrderStatus.FINISH)){
             return true;
         }
         return false;

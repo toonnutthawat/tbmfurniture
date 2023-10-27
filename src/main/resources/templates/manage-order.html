@@ -37,15 +37,15 @@
   <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
     <form action="#" th:action="@{/orders/allOrders/{id}/managed(id=${order.id})}" method="POST">
-        <button  type="submit" name="giveManufacturingStatus"
+        <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkConfirmStatus.equals(false)}" type="submit" name="giveManufacturingStatus"
                  class="btn btn-dark">Manufacturing
         </button>
 
-        <button  type="submit" name="giveDeliveryStatus"
+        <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkManufacturingStatus.equals(false)}" type="submit" name="giveDeliveryStatus"
                  class="btn btn-warning">Delivery
         </button>
 
-        <button  type="submit" name="giveFinishStatus"
+        <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkPaymentCompleteStatus.equals(false)}" type="submit" name="giveFinishStatus"
                  class="btn btn-success">Finish Order
         </button>
 
