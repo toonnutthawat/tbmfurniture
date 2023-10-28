@@ -146,41 +146,11 @@ public class OrderService {
         id = null;
 
     }
-
-    public void giveManufacturingStatus(UUID id){
+    public void giveStatus(UUID id,OrderStatus orderStatus){
         PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
-        purchaseOrder.setStatus(OrderStatus.MANUFACTURING);
+        purchaseOrder.setStatus(orderStatus);
         purchaseOrderRepository.save(purchaseOrder);
     }
 
-    public void giveDeliveryStatus(UUID id){
-        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
-        purchaseOrder.setStatus(OrderStatus.DELIVERY);
-        purchaseOrderRepository.save(purchaseOrder);
-    }
-
-    public void givePaymentCompleteStatus(UUID id){
-        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
-        purchaseOrder.setStatus(OrderStatus.PAYMENTCOMPLETE);
-        purchaseOrderRepository.save(purchaseOrder);
-    }
-
-    public void giveClaimStatus(UUID id){
-        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
-        purchaseOrder.setStatus(OrderStatus.CLAIM);
-        purchaseOrderRepository.save(purchaseOrder);
-    }
-
-    public void giveRepairStatus(UUID id){
-        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
-        purchaseOrder.setStatus(OrderStatus.REPAIR);
-        purchaseOrderRepository.save(purchaseOrder);
-    }
-
-    public void giveFinishStatus(UUID id){
-        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
-        purchaseOrder.setStatus(OrderStatus.FINISH);
-        purchaseOrderRepository.save(purchaseOrder);
-    }
 
 }

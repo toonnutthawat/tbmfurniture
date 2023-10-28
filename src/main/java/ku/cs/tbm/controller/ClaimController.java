@@ -1,5 +1,6 @@
 package ku.cs.tbm.controller;
 
+import ku.cs.tbm.common.OrderStatus;
 import ku.cs.tbm.service.ClaimService;
 import ku.cs.tbm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class ClaimController {
 
     @PostMapping("/{id}/repair")
     private String repairProduct(@PathVariable UUID id, Model model){
-        orderService.giveRepairStatus(id);
+        orderService.giveStatus(id, OrderStatus.REPAIR);
         return "redirect:/claim";
     }
 

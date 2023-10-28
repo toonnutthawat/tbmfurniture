@@ -1,5 +1,6 @@
 package ku.cs.tbm.controller;
 
+import ku.cs.tbm.common.OrderStatus;
 import ku.cs.tbm.entity.Customer;
 import ku.cs.tbm.entity.OrderList;
 import ku.cs.tbm.entity.Product;
@@ -73,19 +74,19 @@ public class OrderController {
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveManufacturingStatus")
     public String giveManufacturingStatus(@PathVariable UUID id, Model model){
-        orderService.giveManufacturingStatus(id);
+        orderService.giveStatus(id, OrderStatus.MANUFACTURING);
         return "redirect:/orders/allOrders";
     }
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveDeliveryStatus")
     public String giveDeliveryStatus(@PathVariable UUID id, Model model){
-        orderService.giveDeliveryStatus(id);
+        orderService.giveStatus(id,OrderStatus.DELIVERY);
         return "redirect:/orders/allOrders";
     }
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveFinishStatus")
     public String giveFinishStatus(@PathVariable UUID id, Model model){
-        orderService.giveFinishStatus(id);
+        orderService.giveStatus(id,OrderStatus.FINISH);
         return "redirect:/orders/allOrders";
     }
 

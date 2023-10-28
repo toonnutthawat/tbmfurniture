@@ -1,5 +1,6 @@
 package ku.cs.tbm.controller;
 
+import ku.cs.tbm.common.OrderStatus;
 import ku.cs.tbm.entity.Claim;
 import ku.cs.tbm.service.ClaimService;
 import ku.cs.tbm.service.OrderService;
@@ -38,7 +39,7 @@ public class DeliveryController {
 
     @PostMapping(value = "/{id}/managed",params = "givePaymentCompleteStatus")
     public String givePaymentCompleteStatus(@PathVariable UUID id,Model model){
-        orderService.givePaymentCompleteStatus(id);
+        orderService.giveStatus(id,OrderStatus.PAYMENTCOMPLETE);
         receiptService.receipt(id);
         return "redirect:/delivery";
     }
@@ -52,7 +53,7 @@ public class DeliveryController {
     @PostMapping("/{id}/claimed")
     public String submitClaim(@PathVariable UUID id, @ModelAttribute Claim claim, Model model){
         claimService.claim(id,claim);
-        orderService.giveClaimStatus(id);
+        orderService.giveStatus(id, OrderStatus.CLAIM);
         return "redirect:/delivery";
     }
 
