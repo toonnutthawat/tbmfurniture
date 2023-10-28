@@ -1,13 +1,13 @@
 package ku.cs.tbm.controller;
 
+import ku.cs.tbm.entity.Claim;
+import ku.cs.tbm.service.ClaimService;
 import ku.cs.tbm.service.OrderService;
+import ku.cs.tbm.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -17,6 +17,12 @@ public class DeliveryController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ReceiptService receiptService;
+
+    @Autowired
+    private ClaimService claimService;
 
     @GetMapping
     public String getAllDeliveryOrders(Model model){
@@ -33,13 +39,26 @@ public class DeliveryController {
     @PostMapping(value = "/{id}/managed",params = "givePaymentCompleteStatus")
     public String givePaymentCompleteStatus(@PathVariable UUID id,Model model){
         orderService.givePaymentCompleteStatus(id);
-        orderService.receipt(id);
+        receiptService.receipt(id);
+        return "redirect:/delivery";
+    }
+
+    @GetMapping("/{id}/claim")
+    public String claim(@PathVariable UUID id,Model model){
+        model.addAttribute("order",orderService.getOrderById(id));
+        return "claim-page";
+    }
+
+    @PostMapping("/{id}/claimed")
+    public String submitClaim(@PathVariable UUID id, @ModelAttribute Claim claim, Model model){
+        claimService.claim(id,claim);
+        orderService.giveClaimStatus(id);
         return "redirect:/delivery";
     }
 
     @GetMapping("/{id}/receipt")
     public String printReceipt(@PathVariable UUID id,Model model){
-        model.addAttribute("receipt",orderService.getReceiptById(id));
+        model.addAttribute("receipt",receiptService.getReceiptById(id));
         return "print-receipt";
     }
 

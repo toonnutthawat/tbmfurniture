@@ -20,6 +20,10 @@
     <button  class="btn btn-dark" th:disabled="${order.checkDeliveryStatus.equals(true)}">Print Receipt</button>
     </form>
 
+    <form action="#" th:action="@{/delivery/{id}/claim(id=${order.id})}">
+        <button  class="btn btn-danger" th:disabled="${order.checkDeliveryStatus.equals(false)}">Claim</button>
+    </form>
+
   
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
@@ -50,9 +54,8 @@
           <button id="submit-button" th:disabled="${order.checkDeliveryStatus.equals(false)}" type="submit" name="givePaymentCompleteStatus"
                    class="btn btn-success"> Payment Complete
           </button>
-
-
     </form>
+
 
 
     

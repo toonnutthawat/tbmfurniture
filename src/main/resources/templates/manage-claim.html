@@ -5,18 +5,23 @@
   <title>TBM Furniture</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
+  <style>
+    button{
+        margin: 10px 10px;
+    }
+
+</style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-
-
 <div class="container w-50 p-3">
-  <h1 class="display-6">Manage</h1>
-
+  <form action="#" th:action="@{/claim/{id}/printClaim(id=${order.id})}">
+  <button  class="btn btn-dark" th:disabled="${order.checkDeliveryStatus.equals(true)}">Print Claim</button>
+  </form>
 
   <table class="table table-bordered table-striped table-hover">
       <thead class="thead-dark">
-      <tr style="text-align: center; vertical-align: top; " class="table-secondary">
+      <tr style="text-align: center; vertical-align: top; " class="table-dark">
           <th>Product</th>
           <th>Price</th>
           <th>Quantity</th>
@@ -36,20 +41,17 @@
 
   <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
-    <form action="#" th:action="@{/orders/allOrders/{id}/managed(id=${order.id})}" method="POST">
-        <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkConfirmStatus.equals(false)}" type="submit" name="giveManufacturingStatus"
-                 class="btn btn-dark">Manufacturing
+    <form action="#" th:action="@{/claim/{id}/repair(id=${order.id})}" method="POST">
+        <div id="error-msg" th:if="${order.checkClaimStatus.equals(false)}" class="alert alert-danger">
+            Already repair
+        </div>
+        <button id="submit-button" th:disabled="${order.checkClaimStatus.equals(false)}" type="submit" 
+                 class="btn btn-success"> Repair
         </button>
-
-        <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkManufacturingStatus.equals(false)  }" type="submit" name="giveDeliveryStatus"
-                 class="btn btn-warning">Delivery
-        </button>
-
-        <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkPaymentCompleteStatus.equals(false)}" type="submit" name="giveFinishStatus"
-                 class="btn btn-success">Finish Order
-        </button>
-
   </form>
+
+
+
   
 </div>
 </body>

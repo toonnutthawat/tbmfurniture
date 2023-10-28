@@ -60,7 +60,7 @@ public class PurchaseOrder {
     }
 
     public boolean checkManufacturingStatus(){
-        if(status.equals(OrderStatus.MANUFACTURING)){
+        if(status.equals(OrderStatus.MANUFACTURING) || status.equals(OrderStatus.REPAIR)){
             return true;
         }
         return false;
@@ -78,6 +78,14 @@ public class PurchaseOrder {
         }
         return false;
     }
+
+    public boolean checkClaimStatus(){
+        if(status.equals(OrderStatus.CLAIM)){
+            return true;
+        }
+        return false;
+    }
+
 
     public boolean checkFinishStatus(){
         if(status.equals(OrderStatus.FINISH)){

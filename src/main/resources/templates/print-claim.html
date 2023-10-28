@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>TBM Furniture</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <style>
+    p{
+      display: inline;
+    }
+  </style>
+  
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-3" style="border: solid 2px gray;">
+  <h1 class="display-5">ใบเคลมสินค้า</h1>
+  <br>
+  <p>หมายเลขเคลมสินค้า : </p>
+  <p th:text="${claim.id}"></p>
+  <br>
+  <p>หมายเลขคำสั่งซื้อ: </p>
+  <p th:text="${claim.purchaseOrder.id}"></p>
+  <br>
+  <p>รหัสพนักงาน: </p>
+  <p th:text="${claim.purchaseOrder.member.id}"></p>
+  <br>
+  <p>รหัสลูกค้า : </p>
+  <p th:text="${claim.purchaseOrder.customer.id}"></p>
+  <br>
+  <p>ชื่อลูกค้า : </p>
+  <p th:text="${claim.purchaseOrder.customer.name}"></p>
+  <br>
+  <p>ชื่อบริษัท : </p>
+  <p th:text="${claim.purchaseOrder.customer.companyName}"></p>
+  <br>
+  <p>วันที่สั่งเคลมสินค้า : </p>
+  <p th:text="${#temporals.format(claim.claimDate, 'dd/MM/yyyy เวลา HH:mm')}"></p>
+  <br>
+  <p>ข้อมูลการเคลม : </p>
+  <p th:text="${claim.claimDetail}"></p>
+
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+    <tr style="text-align: center; vertical-align: top; " class="table-dark">
+      <th>Product</th>
+      <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${claim ne null}" th:each="item : ${claim.purchaseOrder.orderLists}" >
+      <td th:text="${item.product.name}"></td>
+      <td style="text-align: right" th:text="${item.quantity}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>

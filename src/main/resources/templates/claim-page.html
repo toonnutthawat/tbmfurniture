@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TBM Furniture</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container w-50 p-3">
+    <h1 class="display-5">Claim Product</h1>
+  
+    <form action="#" th:action="@{/delivery/{id}/claimed(id=${order.id})}" th:object="${order}" method="POST">
+
+        <div class="mb-3" >
+            <label for="inputOrderId">OrderId</label>
+            <input disabled th:value="${order.customer.id}" id="inputOrderId" type="text" class="form-control"
+                   name="name" >
+        </div>
+      <div class="mb-3" >
+          <label for="inputName">Name</label>
+          <input disabled th:value="${order.customer.name}" id="inputName" type="text" class="form-control"
+                 name="name" >
+      </div>
+  
+      <div class="mb-3">
+        <label for="inputCompanyName">Company Name</label>
+        <input disabled th:value="${order.customer.companyName}" id="inputCompanyName" type="text" class="form-control"
+               name="companyName" >
+    </div>
+  
+    <div class="mb-3">
+      <label for="inputClaimDetail">Claim Detail</label>
+      <input id="inputClaimDetail" type="input" class="form-control"
+             name="claimDetail" required>
+
+  </div>
+      <button id="submit-button" type="submit" class="btn btn-danger">Claim</button>
+  </form>
+  </div>
+</body>
+</html>

@@ -34,7 +34,7 @@
             <td th:text="${#temporals.format(order.OrderDate, 'dd/MM/yyyy HH:mm')}"></td>
             <td th:text="${order.status}"></td>
             <td style="text-align: center">
-                <a class="btn btn-success" th:href="@{/delivery/{id}(id=${order.id})}">Manage</a>
+                <a class="btn btn-danger" th:href="@{/delivery/{id}(id=${order.id})}">Manage</a>
               </td>
             </td>
         </tr>
