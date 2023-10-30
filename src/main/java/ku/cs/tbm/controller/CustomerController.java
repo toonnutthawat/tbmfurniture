@@ -25,7 +25,7 @@ public class CustomerController {
     public String addCustomer(@ModelAttribute Customer customer, Model model){
         customerService.addCustomer(customer);
         //model.addAttribute("customer",customerService.getAllCustomer());
-        return "redirect:/products";
+        return "redirect:/customers";
     }
 
     @GetMapping("/{id}")
