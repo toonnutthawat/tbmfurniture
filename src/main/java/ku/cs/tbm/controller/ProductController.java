@@ -24,7 +24,7 @@ public class ProductController {
 
     @GetMapping("/add")
     public String getProductAdd(Model model){;
-        model.addAttribute("product", productService.getAllProduct());
+        //model.addAttribute("product", productService.getAllProduct());
         return "product-add";
     }
 

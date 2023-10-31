@@ -47,7 +47,7 @@ public class OrderController {
     public String submitOrder(Model model){
         orderService.submitOrder();
         //model.addAttribute("three",false);
-        return "home";
+        return "redirect:/orders/allOrders";
     }
 
     @PostMapping
@@ -57,7 +57,7 @@ public class OrderController {
                          Authentication authentication,
                          Model model){
         orderService.order(customer,product,orderList,authentication.getName());
-        return "home";
+        return "redirect:/orders/orderList";
     }
 
     @GetMapping("/allOrders")
@@ -75,13 +75,13 @@ public class OrderController {
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveManufacturingStatus")
     public String giveManufacturingStatus(@PathVariable UUID id, Model model){
         orderService.giveStatus(id, OrderStatus.MANUFACTURING);
-        return "redirect:/orders/allOrders";
+        return "redirect:/manufacturing";
     }
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveDeliveryStatus")
     public String giveDeliveryStatus(@PathVariable UUID id, Model model){
         orderService.giveStatus(id,OrderStatus.DELIVERY);
-        return "redirect:/orders/allOrders";
+        return "redirect:/delivery";
     }
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveFinishStatus")

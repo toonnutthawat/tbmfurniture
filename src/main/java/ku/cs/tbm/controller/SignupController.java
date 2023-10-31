@@ -16,7 +16,7 @@ public class SignupController {
 
     @GetMapping("/signup")
     public String getSignupPage() {
-        return "signup"; // return หน้าฟอร์ม signup.html
+        return "signup";
     }
     @PostMapping("/signup")
     public String signupUser(@ModelAttribute Member user, Model model) {
@@ -26,7 +26,6 @@ public class SignupController {
         } else {
             model.addAttribute("signupError", "Username not available");
         }
-// return หน้าฟอร์ม signup.html เช่นกัน แต่จะมี message ปรากฎ
         return "signup";
     }
 

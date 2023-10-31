@@ -54,7 +54,7 @@ public class DeliveryController {
     public String submitClaim(@PathVariable UUID id, @ModelAttribute Claim claim, Model model){
         claimService.claim(id,claim);
         orderService.giveStatus(id, OrderStatus.CLAIM);
-        return "redirect:/delivery";
+        return "redirect:/claim";
     }
 
     @GetMapping("/{id}/receipt")
