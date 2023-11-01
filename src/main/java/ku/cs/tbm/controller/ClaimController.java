@@ -37,10 +37,11 @@ public class ClaimController {
 
 
 
-    @PostMapping("/{id}/repair")
+    @PostMapping("/{id}/printClaim")
     private String repairProduct(@PathVariable UUID id, Model model){
         orderService.giveStatus(id, OrderStatus.REPAIR);
-        return "redirect:/claim";
+        model.addAttribute("claim",claimService.getClaimById(id));
+        return "print-claim";
     }
 
     @GetMapping("/{id}/printClaim")

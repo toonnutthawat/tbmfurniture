@@ -41,7 +41,7 @@
 
   <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
-    <form action="#" th:action="@{/claim/{id}/repair(id=${order.id})}" method="POST">
+    <form action="#" th:action="@{/claim/{id}/printClaim(id=${order.id})}" method="POST">
         <div id="error-msg" th:if="${order.checkClaimStatus.equals(false)}" class="alert alert-danger">
             Already repair
         </div>
