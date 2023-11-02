@@ -9,20 +9,46 @@
     <style>
         img{
             width: 100%;
+
+        }
+
+        .content{
+            width: 100%;
+            position: absolute;
+            top: 50%;
+
+            text-align: center;
+            color: white;
+            
+        }
+
+        .content h1{
+            font-size: 80px;
         }
     </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="hero-image">
-    <img src="https://www.stickley.com/cdn/shop/files/HomePage_SURREYHILLSImageBanner.jpg?v=1673554686&width=1500" alt="">
+    <div>
+        <img src="https://www.stickley.com/cdn/shop/files/HomePage_SURREYHILLSImageBanner.jpg?v=1673554686&width=1500" alt="">
+    </div>
+
+    <div class="content">
+        <h1>TBM FURNITURE</h1>
+        <p>TOON BEN MARK</p>
+    </div>
+
 </div>
 <div class="container">
     <h1 class="display-6" style="text-align: center;">  Welcome to TBM </h1>
     <div sec:authorize="isAuthenticated()">
         <p style="text-align: center;">Khun <b><span sec:authentication="name"></span></b></p>
     </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus similique rerum reiciendis eaque fuga? Officiis et, perferendis odit nesciunt quibusdam officia reprehenderit nostrum veritatis nihil, quam ullam! Reprehenderit, quaerat corporis.</p>
+    <p>ที่มาและความสำคัญ : 
+        ปัจจุบันร้านขายโซฟา ใช้วิธี Manual ในการสั่งสินค้า และเคลมสินค้า ซี่งไม่ได้มีวิธีการจัดการกันอย่างเป็นระบบ ทำให้อาจจะเกิดความผิดพลาดในการทำงานได้ เพราะว่าพนักงานจำเป็นที่จะต้องทำงานเอกสารเหล่านี้ผ่านกระดาษ เพื่อที่จำได้ทราบว่าลูกค้าแต่ละรายสั่งสินค้าอะไรมาบ้าง และจุดที่ลูกค้าต้องการให้ซ่อมแซมเพื่อเคลมสินค้า ซึ่งข้อมูลเหล่านี้ถ้าเกิดการสูญหายหรือชำรุดของกระดาษ ก็จะทำให้ข้อมูลที่ร้านได้รับไม่ครบถ้วน
+        ผู้จัดทำจึงได้ออกแบบระบบสั่ง และเคลมสินค้า เพื่อช่วยจัดการระบบการสั่ง และเคลมสินค้าให้มีประสิทธิภาพมากขี้น โดยปรับปรุงให้ใช้การกรอกรายการสั่งซื้อ และการเคลมสินค้าผ่านระบบ และระบบก็จะทำการนำข้อมูลที่ได้ส่งให้ฝ่ายการผลิตได้นำไปใช้ต่อ
+    </p>
     <div sec:authorize="isAnonymous()">
         <a class="btn btn-primary" th:href="@{/login}">Login</a>
         <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>

@@ -6,8 +6,9 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
-        button{
-            margin: 10px 10px;
+
+        .bt{
+            display: inline;
         }
 
     </style>
@@ -16,14 +17,6 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 <div class="container w-50 p-3">
-    <form action="#" th:action="@{/delivery/{id}/receipt(id=${order.id})}">
-    <button  class="btn btn-dark" th:disabled="${order.checkDeliveryStatus.equals(true)}">Print Receipt</button>
-    </form>
-
-    <form action="#" th:action="@{/delivery/{id}/claim(id=${order.id})}">
-        <button  class="btn btn-danger" th:disabled="${order.checkDeliveryStatus.equals(false)}">Claim</button>
-    </form>
-
   
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
@@ -46,15 +39,26 @@
   
   
     <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+
+        <form class="bt"  action="#" th:action="@{/delivery/{id}/managed(id=${order.id})}" method="POST">
+            <div id="error-msg" th:if="${order.checkDeliveryStatus.equals(false)}" class="alert alert-danger">
+                Already paid
+            </div>
+            <button id="submit-button" th:disabled="${order.checkDeliveryStatus.equals(false)}" type="submit" name="givePaymentCompleteStatus"
+                     class="btn btn-success" > Payment Complete
+            </button>
+      </form>
   
-      <form action="#" th:action="@{/delivery/{id}/managed(id=${order.id})}" method="POST">
-          <div id="error-msg" th:if="${order.checkDeliveryStatus.equals(false)}" class="alert alert-danger">
-              Already paid
-          </div>
-          <button id="submit-button" th:disabled="${order.checkDeliveryStatus.equals(false)}" type="submit" name="givePaymentCompleteStatus"
-                   class="btn btn-success"> Payment Complete
-          </button>
-    </form>
+      <form class="bt" action="#" th:action="@{/delivery/{id}/claim(id=${order.id})}">
+          <button  class="btn btn-danger" th:disabled="${order.checkDeliveryStatus.equals(false)}">Claim</button>
+      </form>
+  
+      <form class="bt" action="#" th:action="@{/delivery/{id}/receipt(id=${order.id})}">
+          <button  class="btn btn-dark" th:disabled="${order.checkDeliveryStatus.equals(true)}">Print Receipt</button>
+          </form>
+
+
+
 
 
 

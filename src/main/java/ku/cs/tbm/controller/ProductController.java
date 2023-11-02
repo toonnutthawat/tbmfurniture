@@ -32,6 +32,6 @@ public class ProductController {
     public String createProduct(@ModelAttribute Product product, Model model){
         productService.createProduct(product);
         model.addAttribute("product", productService.getAllProduct());
-        return "redirect:/products";
+        return "redirect:/";
     }
 }

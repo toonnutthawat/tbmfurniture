@@ -42,7 +42,7 @@
         </button>
 
         <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkManufacturingStatus.equals(false)  }" type="submit" name="giveDeliveryStatus"
-                 class="btn btn-warning">Delivery
+                 class="btn btn-dark">Delivery
         </button>
 
         <button th:disabled="${order.checkFinishStatus.equals(true) || order.checkPaymentCompleteStatus.equals(false)}" type="submit" name="giveFinishStatus"

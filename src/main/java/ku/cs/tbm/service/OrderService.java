@@ -100,7 +100,7 @@ public class OrderService {
     public List<PurchaseOrder> getConfirmOrders(){
         List<PurchaseOrder> orders = new ArrayList<>();
         for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
-            if(!purchaseOrder.getStatus().equals(OrderStatus.ORDER)){
+            if(!purchaseOrder.getStatus().equals(OrderStatus.ORDER) && !purchaseOrder.getStatus().equals(OrderStatus.FINISH)){
                 orders.add(purchaseOrder);
             }
         }
