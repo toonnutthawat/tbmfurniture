@@ -1,59 +1,110 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>TBM Furniture</title>
-    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <style> 
-
-        p{
-            display: inline;
-        }
-        
-    </style>
+  <meta charset="UTF-8">
+  <title>TBM Furniture</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
+<div class = "my-5 page" size= "A4" >
+  <div class = "p-5">
+
+    <section class="top-content bb d-flex justify-content-between">
+      <div class="logo">
+        <img src="/img/logo.jpg" alt="" class="img-fluid" style="height: 50px;">
+      </div>
+      <div class="top-left">
+        <div class="graphic-path">
+          <p>ใบผลิตสินค้า</p>
+        </div>
+        <div class="position-relative">
+
+          <p>TBM Furniture </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Head -->
+
+    <section class="store-user mt-5">
+      <div class="col-10">
+        <div class="row bb pb-3">
+          <div class="col-7">
+
+            <h2>TBM Furniture</h2>
+            <p class = "address"> 87/9 Bangkok, <br> Ladyao 10900,
+              <br>THAILAND</p>
 
 
-<div class="container w-50 p-3" style="border: solid 2px gray;">
-    <h1 class="display-5">ใบสั่งผลิตสินค้า</h1>
-    <br>
-    <p>หมายเลขคำสั่งซื้อ : </p>
-    <p th:text="${order.id}"></p>
-    <br>
-    <p>รหัสพนักงาน: </p>
-    <p th:text="${order.member.id}"></p>
-    <br>
-    <p>รหัสลูกค้า : </p>
-    <p th:text="${order.customer.id}"></p>
-    <br>
-    <p>ชื่อลูกค้า : </p>
-    <p th:text="${order.customer.name}"></p>
-    <br>
-    <p>ชื่อบริษัท : </p>
-    <p th:text="${order.customer.companyName}"></p>
-    <br>
-    <p>วันที่สั่งซื้อ : </p>
-    <p th:text="${#temporals.format(order.OrderDate, 'dd/MM/yyyy เวลา HH:mm')}"></p>
-    
+          </div>
+          <div class="col-5">
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-        <tr style="text-align: center; vertical-align: top; " class="table-secondary">
-            <th>Product</th>
-            <th>Quantity</th>
+            <p>Member,</p>
+
+            <h2 th:text="${order.member.name}"></h2>
+            <div class="txm mt-2" display="inline-block">MemberID: </div>
+            <div th:text="${order.member.id}" class="txm mt-2"></div>
+
+          </div>
+        </div>
+        <div class="row extra-info pt-3">
+          <div class="col-7">
+            <p>CustomerID:
+              <span th:text="${order.customer.id}"></span>
+            </p>
+            <p>OrderID: <span th:text="${order.id}"></span>
+            </p>
+
+
+          </div>
+          <div class="col-5">
+
+            <p>วันที่สั่งสินค้า : </p>
+            <div th:text="${#temporals.format(order.OrderDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
+
+            </div>
+          </div>
+        </div>
+
+    </section>
+    <!-- Store user -->
+    <section class="product-area mt-4">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <td>Menu</td>
+          <td>Quantity</td>
         </tr>
         </thead>
         <tbody>
+
         <tr th:if="${order ne null}" th:each="item : ${order.orderLists}" >
-            <td th:text="${item.product.name}"></td>
-            <td style="text-align: right" th:text="${item.quantity}"></td>
+          <td th:text="${item.product.name}"></td>
+          <td  th:text="${item.quantity}"></td>
+
         </tr>
         </tbody>
-    </table>
-  
+      </table>
+    </section>
+
+
+    <!-- Cart BG -->
+
+    <img src="/images/cart.jpeg" class= "img-fluid cart-bg" alt="">
+    <footer>
+      <hr>
+      <p class="m-0 text-center">
+        TBM FURNITURE
+      </p>
+    </footer>
+
+
+  </div>
+
 </div>
+
 </body>
 </html>

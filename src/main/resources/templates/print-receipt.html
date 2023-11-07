@@ -5,56 +5,141 @@
   <title>TBM Furniture</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
-  <style> 
-    p{
-        display: inline;
-    }
-</style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container w-50 p-3" style="border: solid 2px gray;">
-  <h1 class="display-5">ใบเสร็จ</h1>
-  <br>
-  <p>หมายเลขใบเสร็จ : </p>
-  <p th:text="${receipt.id}"></p>
-  <br>
-  <p>หมายเลขคำสั่งซื้อ : </p>
-  <p th:text="${receipt.purchaseOrder.id}"></p>
-  <br>
-  <p>รหัสลูกค้า : </p>
-  <p th:text="${receipt.purchaseOrder.customer.id}"></p>
-  <br>
-  <p>ชื่อลูกค้า : </p>
-  <p th:text="${receipt.purchaseOrder.customer.name}"></p>
-  <br>
-  <p>ชื่อบริษัท : </p>
-  <p th:text="${receipt.purchaseOrder.customer.companyName}"></p>
-  <br>
-  <p>วันที่จัดส่ง : </p>
-  <p th:text="${#temporals.format(receipt.deliveryDate, 'dd/MM/yyyy เวลา HH:mm')}"></p>
-  
+<div class = "my-5 page" size= "A4" >
+<div class = "p-5">
 
-  <table class="table table-bordered table-striped table-hover">
-      <thead class="thead-dark">
-      <tr style="text-align: center; vertical-align: top; " class="table-secondary">
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
+  <section class="top-content bb d-flex justify-content-between">
+    <div class="logo">
+      <img src="/img/logo.jpg" alt="" class="img-fluid" style="height: 50px;">
+    </div>
+    <div class="top-left">
+      <div class="graphic-path">
+        <p>ใบเสร็จ</p>
+      </div>
+      <div class="position-relative">
+
+        <p>TBM Furniture : <span th:text="${receipt.id}"></span></p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Head -->
+
+  <section class="store-user mt-5">
+    <div class="col-10">
+      <div class="row bb pb-3">
+        <div class="col-7">
+
+          <h2>TBM Furniture</h2>
+          <p class = "address"> 87/9 Bangkok, <br> Ladyao 10900,
+            <br>THAILAND</p>
+
+
+        </div>
+        <div class="col-5">
+
+          <p>Customer,</p>
+
+          <h2 th:text="${receipt.purchaseOrder.customer.name}"></h2>
+          <div class="txm mt-2" display="inline-block">CustomerID: </div>
+          <div th:text="${receipt.purchaseOrder.customer.id}" class="txm mt-2"></div>
+
+        </div>
+      </div>
+      <div class="row extra-info pt-3">
+        <div class="col-7">
+          <p>Payment Method:
+            <span>BANK</span>
+          </p>
+          <p>OrderID: <span th:text="${receipt.purchaseOrder.id}"></span>
+          </p>
+
+
+        </div>
+        <div class="col-5">
+
+          <p>วันที่จัดส่ง : </p>
+          <div th:text="${#temporals.format(receipt.deliveryDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
+
+          </div>
+        </div>
+      </div>
+
+  </section>
+  <!-- Store user -->
+  <section class="product-area mt-4">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <td>Menu</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>SubTotal</td>
       </tr>
       </thead>
       <tbody>
+
       <tr th:if="${receipt ne null}" th:each="item : ${receipt.purchaseOrder.orderLists}" >
-          <td th:text="${item.product.name}"></td>
-          <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')}"></td>
-          <td style="text-align: right" th:text="${item.quantity}"></td>
-          <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubTotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+        <td th:text="${item.product.name}"></td>
+        <td th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')}"></td>
+        <td  th:text="${item.quantity}"></td>
+        <td  th:text="${#numbers.formatDecimal(item.getSubTotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+
       </tr>
       </tbody>
-  </table>
-  <p th:if="${receipt ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(receipt.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+    </table>
+  </section>
+
+  <section class="balance-info">
+    <div class="row">
+      <div class="col-8">
+        <p class="m-0 font-weight-bold"> Note:
+        </p>
+        <p> we not accepting refunds in any case.</p>
+      </div>
+      <div class="col-4">
+        <table class="table border-0 table-hover">
+          <tr>
+            <td>Deliver:</td>
+            <td>Free</td>
+          </tr>
+          <tfoot>
+          <tr>
+            <td>Total:</td>
+            <td th:text="${#numbers.formatDecimal(receipt.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+          </tr>
+          </tfoot>
+
+
+        </table>
+
+        <div class="col-12">
+          <p class = "text-center m-0">Manager</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Cart BG -->
+
+  <img src="/images/cart.jpeg" class= "img-fluid cart-bg" alt="">
+  <footer>
+    <hr>
+    <p class="m-0 text-center">
+      TBM FURNITURE
+    </p>
+  </footer>
+
 
 </div>
+
+</div>
+
 </body>
 </html>
