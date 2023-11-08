@@ -10,7 +10,7 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="container w-50 p-3">
   <h1 class="display-6">All Customers</h1>
-  <table th:each="customer : ${customers}" class="table table-bordered table-striped table-hover">
+  <table th:each="customer : ${#lists.sort(customers)}" class="table table-bordered table-striped table-hover">
     <tr class="table-dark">
       <td colspan="3"><span th:text="${customer.id}"></span></td>
     </tr>

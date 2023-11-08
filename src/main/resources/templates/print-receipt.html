@@ -45,9 +45,13 @@
           <p>Customer,</p>
 
           <h2 th:text="${receipt.purchaseOrder.customer.name}"></h2>
-          <div class="txm mt-2" display="inline-block">CustomerID: </div>
-          <div th:text="${receipt.purchaseOrder.customer.id}" class="txm mt-2"></div>
+          <p class="txm mt-2" display="inline-block">CustomerID:
+            <span th:text="${receipt.purchaseOrder.customer.id}" class="txm mt-2"></span></p>
 
+          <p>OrderID: <span th:text="${receipt.purchaseOrder.id}"></span>
+          </p>
+
+          <p>วันที่จัดส่ง :           <span th:text="${#temporals.format(receipt.deliveryDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5"></p>
         </div>
       </div>
       <div class="row extra-info pt-3">
@@ -55,17 +59,16 @@
           <p>Payment Method:
             <span>BANK</span>
           </p>
-          <p>OrderID: <span th:text="${receipt.purchaseOrder.id}"></span>
-          </p>
+
 
 
         </div>
         <div class="col-5">
 
-          <p>วันที่จัดส่ง : </p>
-          <div th:text="${#temporals.format(receipt.deliveryDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
 
-          </div>
+
+
+          </span>
         </div>
       </div>
 
@@ -99,7 +102,6 @@
       <div class="col-8">
         <p class="m-0 font-weight-bold"> Note:
         </p>
-        <p> we not accepting refunds in any case.</p>
       </div>
       <div class="col-4">
         <table class="table border-0 table-hover">

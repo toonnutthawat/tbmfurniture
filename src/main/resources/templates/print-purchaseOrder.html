@@ -45,29 +45,24 @@
             <p>Member,</p>
 
             <h2 th:text="${order.member.name}"></h2>
-            <div class="txm mt-2" display="inline-block">MemberID: </div>
-            <div th:text="${order.member.id}" class="txm mt-2"></div>
-
-          </div>
-        </div>
-        <div class="row extra-info pt-3">
-          <div class="col-7">
-            <p>CustomerID:
-              <span th:text="${order.customer.id}"></span>
+            <p class="txm mt-2" display="inline-block">MemberID:
+              <span th:text="${order.member.id}" class="txm mt-2"></span>
             </p>
-            <p>OrderID: <span th:text="${order.id}"></span>
-            </p>
+            <div >
+              <p>CustomerID:
+                <span th:text="${order.customer.id}"></span>
+              </p>
+              <p>OrderID: <span th:text="${order.id}"></span>
+              </p>
 
-
-          </div>
-          <div class="col-5">
-
-            <p>วันที่สั่งสินค้า : </p>
-            <div th:text="${#temporals.format(order.OrderDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
 
             </div>
+
+            <p>วันที่สั่งสินค้า :             <span th:text="${#temporals.format(order.OrderDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
+            </span> </p>
           </div>
         </div>
+
 
     </section>
     <!-- Store user -->

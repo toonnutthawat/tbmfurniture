@@ -74,19 +74,19 @@ public class OrderController {
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveManufacturingStatus")
     public String giveManufacturingStatus(@PathVariable UUID id, Model model){
-        orderService.giveStatus(id, OrderStatus.MANUFACTURING);
+        orderService.giveStatus(id,"MANUFACTURING");
         return "redirect:/manufacturing";
     }
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveDeliveryStatus")
     public String giveDeliveryStatus(@PathVariable UUID id, Model model){
-        orderService.giveStatus(id,OrderStatus.DELIVERY);
+        orderService.giveStatus(id,"DELIVERY");
         return "redirect:/delivery";
     }
 
     @PostMapping(value = "/allOrders/{id}/managed",params = "giveFinishStatus")
     public String giveFinishStatus(@PathVariable UUID id, Model model){
-        orderService.giveStatus(id,OrderStatus.FINISH);
+        orderService.giveStatus(id,"FINISH");
         return "redirect:/orders/allOrders";
     }
 

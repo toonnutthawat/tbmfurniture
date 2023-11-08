@@ -47,25 +47,28 @@
                         <h2 th:text="${claim.purchaseOrder.member.name}"></h2>
                         <div class="txm mt-2" display="inline-block">MemberID: </div>
                         <div th:text="${claim.purchaseOrder.member.id}" class="txm mt-2"></div>
-
-                    </div>
-                </div>
-                <div class="row extra-info pt-3">
-                    <div class="col-7">
                         <p>CustomerID:
                             <span th:text="${claim.purchaseOrder.customer.id}"></span>
                         </p>
                         <p>OrderID: <span th:text="${claim.purchaseOrder.id}"></span>
                         </p>
 
+                        <p>วันที่เคลมสินค้า : <span th:text="${#temporals.format(claim.claimDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
+
+                        </span></p>
+
+                    </div>
+                </div>
+                <div class="row extra-info pt-3">
+                    <div class="col-7">
+
+
 
                     </div>
                     <div class="col-5">
 
-                        <p>วันที่เคลมสินค้า</p>
-                        <div th:text="${#temporals.format(claim.claimDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
 
-                        </div>
+
                     </div>
                 </div>
 

@@ -40,7 +40,7 @@ public class OrderService {
         Member member = memberRepository.findByUsername(memberUsername);
 
         PurchaseOrder newOrder = new PurchaseOrder();
-        newOrder.setStatus(OrderStatus.ORDER);
+        newOrder.setStatus("ORDER");
         newOrder.setMember(member);
         PurchaseOrder record = purchaseOrderRepository.save(newOrder);
         id = record.getId();
@@ -100,7 +100,7 @@ public class OrderService {
     public List<PurchaseOrder> getConfirmOrders(){
         List<PurchaseOrder> orders = new ArrayList<>();
         for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
-            if(!purchaseOrder.getStatus().equals(OrderStatus.ORDER) && !purchaseOrder.getStatus().equals(OrderStatus.FINISH)){
+            if(!purchaseOrder.getStatus().equals("ORDER") && !purchaseOrder.getStatus().equals("FINISH")){
                 orders.add(purchaseOrder);
             }
         }
@@ -110,7 +110,7 @@ public class OrderService {
     public List<PurchaseOrder> getManufacturingOrders(){
         List<PurchaseOrder> orders = new ArrayList<>();
         for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
-            if(purchaseOrder.getStatus().equals(OrderStatus.MANUFACTURING)){
+            if(purchaseOrder.getStatus().equals("MANUFACTURING")){
                 orders.add(purchaseOrder);
             }
         }
@@ -120,7 +120,7 @@ public class OrderService {
     public List<PurchaseOrder> getDeliveryOrders(){
         List<PurchaseOrder> orders = new ArrayList<>();
         for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
-            if(purchaseOrder.getStatus().equals(OrderStatus.DELIVERY) || purchaseOrder.getStatus().equals(OrderStatus.PAYMENTCOMPLETE)){
+            if(purchaseOrder.getStatus().equals("DELIVERY") || purchaseOrder.getStatus().equals("PAYMENTCOMPLETE")){
                 orders.add(purchaseOrder);
             }
         }
@@ -130,7 +130,7 @@ public class OrderService {
     public List<PurchaseOrder> getClaimOrders(){
         List<PurchaseOrder> orders = new ArrayList<>();
         for(PurchaseOrder purchaseOrder : purchaseOrderRepository.findAll()){
-            if(purchaseOrder.getStatus().equals(OrderStatus.CLAIM) || purchaseOrder.getStatus().equals(OrderStatus.REPAIR)){
+            if(purchaseOrder.getStatus().equals("CLAIM") || purchaseOrder.getStatus().equals("REPAIR")){
                 orders.add(purchaseOrder);
             }
         }
@@ -141,12 +141,12 @@ public class OrderService {
         PurchaseOrder currentOrder =
                 purchaseOrderRepository.findById(id).get();
         currentOrder.setOrderDate(LocalDateTime.now());
-        currentOrder.setStatus(OrderStatus.CONFIRM);
+        currentOrder.setStatus("CONFIRM");
         purchaseOrderRepository.save(currentOrder);
         id = null;
 
     }
-    public void giveStatus(UUID id,OrderStatus orderStatus){
+    public void giveStatus(UUID id,String orderStatus){
         PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id).get();
         purchaseOrder.setStatus(orderStatus);
         purchaseOrderRepository.save(purchaseOrder);

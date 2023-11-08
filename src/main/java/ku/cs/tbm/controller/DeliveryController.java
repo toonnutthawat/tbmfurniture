@@ -39,7 +39,7 @@ public class DeliveryController {
 
     @PostMapping(value = "/{id}/managed",params = "givePaymentCompleteStatus")
     public String givePaymentCompleteStatus(@PathVariable UUID id,Model model){
-        orderService.giveStatus(id,OrderStatus.PAYMENTCOMPLETE);
+        orderService.giveStatus(id,"PAYMENTCOMPLETE");
         receiptService.receipt(id);
         return "redirect:/delivery";
     }
@@ -53,7 +53,7 @@ public class DeliveryController {
     @PostMapping("/{id}/claimed")
     public String submitClaim(@PathVariable UUID id, @ModelAttribute Claim claim, Model model){
         claimService.claim(id,claim);
-        orderService.giveStatus(id, OrderStatus.CLAIM);
+        orderService.giveStatus(id,"CLAIM");
         return "redirect:/claim";
     }
 

@@ -24,7 +24,7 @@ public class CustomerService {
     public List<Customer> getALlCustomerHasGoodCredit(){
         List<Customer> list = new ArrayList<>();
         for(Customer customer: customerRepository.findAll()){
-            if(customer.getCredit().equals(CreditStatus.GoodCredit)){
+            if(customer.getCredit().equals("GOODCREDIT")){
                 list.add(customer);
             }
         }
@@ -37,7 +37,7 @@ public class CustomerService {
         record.setCompanyName(customer.getCompanyName());
         record.setNumber(customer.getNumber());
         record.setAddress(customer.getAddress());
-        record.setCredit(CreditStatus.NotSpecified);
+        record.setCredit("NOTSPECIFIED");
 
         customerRepository.save(record);
     }
@@ -48,13 +48,13 @@ public class CustomerService {
 
     public void giveGoodCredit(UUID id){
         Customer customer =  customerRepository.findById(id).get();
-        customer.setCredit(CreditStatus.GoodCredit);
+        customer.setCredit("GOODCREDIT");
         customerRepository.save(customer);
     }
 
     public void giveBadCredit(UUID id){
         Customer customer =  customerRepository.findById(id).get();
-        customer.setCredit(CreditStatus.BadCredit);
+        customer.setCredit("BADCREDIT");
         customerRepository.save(customer);
     }
 

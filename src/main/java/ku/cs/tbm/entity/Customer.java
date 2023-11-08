@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Customer {
+public class Customer implements Comparable<Customer>{
     @Id
     @GeneratedValue
     private UUID id;
@@ -23,7 +23,7 @@ public class Customer {
     private String number;
     private String address;
 
-    private CreditStatus credit;
+    private String credit;
 
     public String getCompanyName() {
         return companyName;
@@ -31,4 +31,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
+
+    @Override
+    public int compareTo(Customer other) {
+        return this.name.compareTo(other.getName());
+    }
 }

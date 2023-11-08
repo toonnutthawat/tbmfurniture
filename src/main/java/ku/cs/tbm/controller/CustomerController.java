@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.UUID;
 
 @Controller
@@ -52,7 +55,8 @@ public class CustomerController {
 
     @GetMapping
     public String getAllCustomer(Model model){
-        model.addAttribute("customers",customerService.getAllCustomer());
+        Collections.sort(customerService.getAllCustomer());
+        model.addAttribute("customers", customerService.getAllCustomer());
         return "customer-all";
     }
 }

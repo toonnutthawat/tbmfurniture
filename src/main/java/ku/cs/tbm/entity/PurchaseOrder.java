@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class PurchaseOrder {
+public class PurchaseOrder implements Comparable<PurchaseOrder>{
 
     @Id
     @GeneratedValue
@@ -25,7 +25,7 @@ public class PurchaseOrder {
     private LocalDateTime orderDate;
 
 
-    private OrderStatus status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -53,34 +53,34 @@ public class PurchaseOrder {
         }
     }
     public boolean checkConfirmStatus(){
-        if(status.equals(OrderStatus.CONFIRM)){
+        if(status.equals("CONFIRM")){
             return true;
         }
         return false;
     }
 
     public boolean checkManufacturingStatus(){
-        if(status.equals(OrderStatus.MANUFACTURING) || status.equals(OrderStatus.REPAIR)){
+        if(status.equals("MANUFACTURING") || status.equals("REPAIR")){
             return true;
         }
         return false;
     }
     public boolean checkDeliveryStatus(){
-        if(status.equals(OrderStatus.DELIVERY)){
+        if(status.equals("DELIVERY")){
             return true;
         }
         return false;
     }
 
     public boolean checkPaymentCompleteStatus(){
-        if(status.equals(OrderStatus.PAYMENTCOMPLETE)){
+        if(status.equals("PAYMENTCOMPLETE")){
             return true;
         }
         return false;
     }
 
     public boolean checkClaimStatus(){
-        if(status.equals(OrderStatus.CLAIM)){
+        if(status.equals("CLAIM")){
             return true;
         }
         return false;
@@ -88,9 +88,14 @@ public class PurchaseOrder {
 
 
     public boolean checkFinishStatus(){
-        if(status.equals(OrderStatus.FINISH)){
+        if(status.equals("FINISH")){
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(PurchaseOrder o) {
+        return getOrderDate().compareTo(o.getOrderDate());
     }
 }

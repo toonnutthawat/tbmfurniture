@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Collections;
 import java.util.UUID;
 
 @Controller
@@ -39,14 +40,14 @@ public class ClaimController {
 
     @PostMapping("/{id}/printClaim")
     private String repairProduct(@PathVariable UUID id, Model model){
-        orderService.giveStatus(id, OrderStatus.REPAIR);
+        orderService.giveStatus(id, "REPAIR");
         model.addAttribute("claim",claimService.getClaimById(id));
         return "print-claim";
     }
 
     @GetMapping("/{id}/printClaim")
     private String printClaim(@PathVariable UUID id, Model model){
-        model.addAttribute("claim",claimService.getClaimById(id));
+        model.addAttribute("claim", claimService.getClaimById(id));
         return "print-claim";
     }
 
