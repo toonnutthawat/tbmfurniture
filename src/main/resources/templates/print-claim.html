@@ -45,8 +45,9 @@
                         <p>Member,</p>
 
                         <h2 th:text="${claim.purchaseOrder.member.name}"></h2>
-                        <div class="txm mt-2" display="inline-block">MemberID: </div>
-                        <div th:text="${claim.purchaseOrder.member.id}" class="txm mt-2"></div>
+                        <p class="txm mt-2" display="inline-block">MemberID:
+                            <span th:text="${claim.purchaseOrder.member.id}" class="txm mt-2"></span></p>
+
                         <p>CustomerID:
                             <span th:text="${claim.purchaseOrder.customer.id}"></span>
                         </p>
